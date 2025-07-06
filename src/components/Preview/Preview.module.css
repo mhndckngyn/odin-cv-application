@@ -1,0 +1,9 @@
+.preview {
+
+}
+
+@media (width >= 48rem) {
+  .preview {
+    flex: 1.9;
+  }
+}

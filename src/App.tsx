@@ -1,8 +1,17 @@
+import Form from './components/Form/Form';
+import Header from './components/static/Header';
+import styles from './app.module.css';
+import Preview from './components/Preview/Preview';
+
 function App() {
   return (
-    <>
-      <button className='btn btn-primary'>Click me</button>
-    </>
+    <div className={styles.app}>
+      <Header />
+      <main className={styles['app__main']}>
+        <Form />
+        <Preview />
+      </main>
+    </div>
   );
 }
 

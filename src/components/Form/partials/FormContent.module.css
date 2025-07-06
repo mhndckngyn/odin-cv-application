@@ -1,0 +1,58 @@
+.info {
+  margin: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.info__title {
+  text-align: center;
+  font-weight: bold;
+  font-size: var(--text-xl);
+  line-height: var(--text-xl--line-height);
+  margin-bottom: 0.75rem;
+}
+
+.info__fieldContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.info__fieldContainer:not(:first-child) {
+  margin-top: 1rem;
+}
+
+.field__label {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  font-weight: 500;
+}
+
+.field__tag {
+  color: black;
+  padding: 0.1rem 0.4rem;
+  border-radius: 40px;
+  font-size: var(--text-xs);
+  font-style: italic;
+}
+
+.field__tag--recommended {
+  background-color: var(--color-green-400);
+}
+
+.field__tag--optional {
+  background-color: var(--color-amber-400);
+}
+
+.field__input {
+  padding: 0.5rem;
+  font-size: var(--text-sm);
+  line-height: var(--text-sm--line-height);
+  background-color: var(--color-seasonal-bgdark);
+  border: 1px solid var(--color-gray-300);
+  border-radius: 0.45rem;
+}
+
+.field__textarea {
+  resize: none;
+}

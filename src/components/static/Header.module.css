@@ -1,0 +1,12 @@
+.header {
+  color: var(--color-seasonal-hl);
+  text-align: center;
+  background-color: var(--color-seasonal-bgdark);
+  padding-block: 1rem;
+}
+
+.header__name {
+  font-weight: bold;
+  font-size: var(--text-3xl);
+  line-height: var(--text-3xl--line-height);
+}
