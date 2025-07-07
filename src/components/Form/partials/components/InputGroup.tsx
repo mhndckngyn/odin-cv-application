@@ -39,10 +39,7 @@ export default function InputGroup<T extends Record<string, AllowedValue>>({
           }
           id={id}
           rows={5}
-          className={clsx(
-            styles['field__input'],
-            styles['field__textarea'],
-          )}
+          className={clsx(styles['field__input'], styles['field__textarea'])}
           name={id}
           placeholder={placeholder}
         />

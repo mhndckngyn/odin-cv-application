@@ -252,21 +252,21 @@
   --color-black: #000;
   --color-white: #fff;
 
-  --text-xs: 0.75rem;  
+  --text-xs: 0.75rem;
   --text-xs--line-height: calc(1 / 0.75);
-  --text-sm: 0.875rem;  
-  --text-sm--line-height: calc(1.25 / 0.875); 
-  --text-base: 1rem; 
-  --text-base--line-height: calc(1.5 / 1); 
-  --text-lg: 1.125rem; 
-  --text-lg--line-height: calc(1.75 / 1.125); 
-  --text-xl: 1.25rem; 
-  --text-xl--line-height: calc(1.75 / 1.25); 
-  --text-2xl: 1.5rem; 
+  --text-sm: 0.875rem;
+  --text-sm--line-height: calc(1.25 / 0.875);
+  --text-base: 1rem;
+  --text-base--line-height: calc(1.5 / 1);
+  --text-lg: 1.125rem;
+  --text-lg--line-height: calc(1.75 / 1.125);
+  --text-xl: 1.25rem;
+  --text-xl--line-height: calc(1.75 / 1.25);
+  --text-2xl: 1.5rem;
   --text-2xl--line-height: calc(2 / 1.5);
-  --text-3xl: 1.875rem; 
-  --text-3xl--line-height: calc(2.25 / 1.875); 
-  --text-4xl: 2.25rem; 
+  --text-3xl: 1.875rem;
+  --text-3xl--line-height: calc(2.25 / 1.875);
+  --text-4xl: 2.25rem;
   --text-4xl--line-height: calc(2.5 / 2.25);
 
   --spacing: 0.25rem;
@@ -319,8 +319,14 @@ html,
     'Segoe UI Symbol',
     'Noto Color Emoji'
   ); /* 4 */
-  font-feature-settings: --theme(--default-font-feature-settings, normal); /* 5 */
-  font-variation-settings: --theme(--default-font-variation-settings, normal); /* 6 */
+  font-feature-settings: --theme(
+    --default-font-feature-settings,
+    normal
+  ); /* 5 */
+  font-variation-settings: --theme(
+    --default-font-variation-settings,
+    normal
+  ); /* 6 */
   -webkit-tap-highlight-color: transparent; /* 7 */
 }
 
@@ -400,8 +406,14 @@ pre {
     'Courier New',
     monospace
   ); /* 1 */
-  font-feature-settings: --theme(--default-mono-font-feature-settings, normal); /* 2 */
-  font-variation-settings: --theme(--default-mono-font-variation-settings, normal); /* 3 */
+  font-feature-settings: --theme(
+    --default-mono-font-feature-settings,
+    normal
+  ); /* 2 */
+  font-variation-settings: --theme(
+    --default-mono-font-variation-settings,
+    normal
+  ); /* 3 */
   font-size: 1em; /* 4 */
 }
 
