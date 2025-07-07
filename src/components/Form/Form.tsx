@@ -6,9 +6,9 @@ import {
 } from 'lucide-react';
 import { useState } from 'react';
 import styles from './Form.module.css';
-import Education from './partials/Education';
-import Experience from './partials/Experience';
-import Info from './partials/Info';
+import Education from './partials/Education/Education';
+import Experience from './partials/Experience/Experience';
+import Info from './partials/Info/Info';
 
 export default function Form() {
   const [tab, setTab] = useState<Tab>('PERSONAL_INFO');

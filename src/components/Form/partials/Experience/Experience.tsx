@@ -1,44 +1,47 @@
-import clsx from 'clsx';
 import { useState } from 'react';
-import { generateId, toMonthString } from '../../../utils';
+import { generateId, toMonthString } from '@/utils';
 import styles from './Experience.module.css';
-import commonStyles from './FormContent.module.css';
+import FormButton from '../components/FormButton';
+import commonStyles from '../../Form.module.css';
+import InputGroup, { InputDetail } from '../components/InputGroup';
 
 export default function Experience() {
   const [view, setView] = useState<TabView>('add');
   const [items, setItems] = useState<ExperienceItem[]>([]);
-  const [fieldValues, setFieldValues] = useState<FieldData>({});
+
+  /* Manage input values */
+  const [inputValue, setInputValue] = useState<InputValue>({});
 
   /* Interact with states */
   const addItem = () => {
-    const newItem: ExperienceItem = { ...fieldValues, id: generateId() };
+    const newItem: ExperienceItem = { ...inputValue, id: generateId() };
     setItems([...items, newItem]);
-    setFieldValues({});
+    setInputValue({});
   };
 
   const saveCurrentItem = () => {
-    if (!fieldValues) {
+    if (!inputValue) {
       return;
     }
 
-    const id = fieldValues.id;
+    const id = inputValue.id;
     const updated = items.map((item) => {
       if (item.id !== id) {
         return item;
       }
 
-      return fieldValues;
+      return inputValue;
     });
 
     setItems(updated);
   };
 
   const deleteCurrentItem = () => {
-    if (!fieldValues) {
+    if (!inputValue) {
       return;
     }
 
-    const deleted = items.filter((item) => item.id !== fieldValues.id);
+    const deleted = items.filter((item) => item.id !== inputValue.id);
     setItems(deleted);
     setView('list');
   };
@@ -47,13 +50,13 @@ export default function Experience() {
   const loadItemToEdit = (id: string) => {
     const item = items.find((i) => i.id === id);
     if (item) {
-      setFieldValues(item);
+      setInputValue(item);
       setView('edit');
     }
   };
 
   const handleShowAddForm = () => {
-    setFieldValues({});
+    setInputValue({});
     setView('add');
   };
 
@@ -77,7 +80,7 @@ export default function Experience() {
   };
 
   /* Form detail */
-  const fieldInfo: Field[] = [
+  const inputDetail: InputDetail<InputValue>[] = [
     {
       id: 'company',
       label: 'Company',
@@ -125,62 +128,7 @@ export default function Experience() {
     },
   ];
 
-  /* Renders */
-  const fields = fieldInfo.map(
-    ({ id, label, type, placeholder, tag, attribute }) => (
-      <div key={id} className={commonStyles['info__fieldContainer']}>
-        <label className={commonStyles['field__label']} htmlFor={id}>
-          {label}
-          {tag && (
-            <span
-              className={clsx(commonStyles['field__tag'], {
-                [commonStyles['field__tag--recommended']]:
-                  tag === 'recommended',
-                [commonStyles['field__tag--optional']]: tag === 'optional',
-              })}
-            >
-              {tag}
-            </span>
-          )}
-        </label>
-        {type === 'textarea' ? (
-          <textarea
-            value={fieldValues[attribute]}
-            onChange={(event) =>
-              setFieldValues({
-                ...fieldValues,
-                [attribute]: event.target.value,
-              })
-            }
-            id={id}
-            rows={5}
-            className={clsx(
-              commonStyles['field__input'],
-              commonStyles['field__textarea'],
-            )}
-            name={id}
-            placeholder={placeholder}
-          />
-        ) : (
-          <input
-            value={fieldValues[attribute]}
-            onChange={(event) =>
-              setFieldValues({
-                ...fieldValues,
-                [attribute]: event.target.value,
-              })
-            }
-            className={commonStyles['field__input']}
-            id={id}
-            name={id}
-            type={type}
-            placeholder={placeholder}
-          />
-        )}
-      </div>
-    ),
-  );
-
+  /* Render list of item */
   const itemList = items.map((item, i) => (
     <>
       <button
@@ -200,6 +148,7 @@ export default function Experience() {
     </>
   ));
 
+  /* Controls shown when adding an item */
   const addFormControls = (
     <div className={styles['form__buttonContainer']}>
       <div className={styles['buttonContainer__spacer']} />
@@ -218,6 +167,7 @@ export default function Experience() {
     </div>
   );
 
+  /* Controls shown when editing an item */
   const editFormControls = (
     <div className={styles['form__buttonContainer']}>
       <FormButton
@@ -246,7 +196,7 @@ export default function Experience() {
     <div className={commonStyles.info}>
       <h2 className={commonStyles['info__title']}>Work Experience</h2>
       {view === 'list' ? (
-        /* Show list of Work Experience */
+        /* Show list of item */
         <div className={styles['list__container']}>
           {itemList}
           <button
@@ -259,7 +209,13 @@ export default function Experience() {
       ) : (
         /* Show the form for adding or editing */
         <div>
-          <div>{fields}</div>
+          <div>
+            <InputGroup<InputValue>
+              detail={inputDetail}
+              value={inputValue}
+              setValue={setInputValue}
+            />
+          </div>
           {view === 'add' ? addFormControls : editFormControls}
         </div>
       )}
@@ -267,26 +223,7 @@ export default function Experience() {
   );
 }
 
-const FormButton = ({
-  children,
-  className,
-  ...props
-}: React.ButtonHTMLAttributes<HTMLButtonElement>) => (
-  <button className={clsx(styles['form__btn'], className)} {...props}>
-    {children}
-  </button>
-);
-
 type TabView = 'list' | 'edit' | 'add';
-
-type Field = {
-  id: string;
-  label: string;
-  type: string;
-  placeholder: string;
-  tag?: 'recommended' | 'optional';
-  attribute: keyof FieldData;
-};
 
 type ExperienceItem = {
   id?: string;
@@ -298,4 +235,4 @@ type ExperienceItem = {
   description?: string;
 };
 
-type FieldData = Partial<ExperienceItem>;
+type InputValue = Partial<ExperienceItem>;
